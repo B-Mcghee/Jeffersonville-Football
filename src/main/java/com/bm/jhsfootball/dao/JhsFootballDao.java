@@ -8,6 +8,6 @@ public interface JhsFootballDao {
     User addUser(User user);
     User getUser(int userId);
     List<User> getAllUsers();
-    void updateUser(User user);
+    void updateUser(int oldUserId, User newUser);
     void removeUser(int userId);
 }
