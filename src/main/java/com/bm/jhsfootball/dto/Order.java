@@ -2,9 +2,15 @@ package com.bm.jhsfootball.dto;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 @Data
 public class Order {
-    private int orderId;
+    private int id;
     private int userId;
-    private
+    private int status;
+    private BigDecimal totalPrice;
+    private List<Integer> items;
+
 }
