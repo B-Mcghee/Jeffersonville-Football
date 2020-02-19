@@ -1,5 +1,8 @@
 package com.bm.jhsfootball.dto;
 
+import lombok.Data;
+
+@Data
 public class Address {
     private int id;
     private int userId;
