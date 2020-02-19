@@ -91,22 +91,22 @@ public class InMemoryJhsFootballDaoImpl implements JhsFootballDao {
 
     @Override
     public Item getItem(int itemId) {
-        return null;
+        return itemMap.get(itemId);
     }
 
     @Override
     public List<Item> getAllItems() {
-        return null;
+        return new ArrayList<>(itemMap.values());
     }
 
     @Override
     public void updateItem(int oldItemId, Item newItem) {
-
+        itemMap.replace(oldItemId, newItem);
     }
 
     @Override
     public void removeItem(int itemId) {
-
+        itemMap.remove(itemId);
     }
 
     /**
@@ -116,27 +116,28 @@ public class InMemoryJhsFootballDaoImpl implements JhsFootballDao {
      */
     @Override
     public Order addOrder(Order order) {
-        return null;
+        int id = order.getId();
+        return orderMap.put(id, order);
     }
 
     @Override
     public Order getOrder(int orderId) {
-        return null;
+        return orderMap.get(orderId);
     }
 
     @Override
     public List<Order> getAllOrders() {
-        return null;
+        return new ArrayList<>(orderMap.values());
     }
 
     @Override
     public void updateOrder(int oldOrderId, Order newOrder) {
-
+        orderMap.replace(oldOrderId, newOrder);
     }
 
     @Override
     public void removeOrder(int orderId) {
-
+        orderMap.remove(orderId);
     }
 
     /**
@@ -146,27 +147,28 @@ public class InMemoryJhsFootballDaoImpl implements JhsFootballDao {
      */
     @Override
     public Role addRole(Role role) {
-        return null;
+        int id = role.getId();
+        return roleMap.put(id, role);
     }
 
     @Override
     public Role getRole(int roleId) {
-        return null;
+        return roleMap.get(roleId);
     }
 
     @Override
     public List<Role> getAllRoles() {
-        return null;
+        return new ArrayList<>(roleMap.values());
     }
 
     @Override
     public void updateRole(int oldRoleId, Role newRole) {
-
+        roleMap.replace(oldRoleId, newRole);
     }
 
     @Override
     public void removeRole(int roleId) {
-
+        roleMap.remove(roleId);
     }
 
     /**
@@ -176,27 +178,28 @@ public class InMemoryJhsFootballDaoImpl implements JhsFootballDao {
      */
     @Override
     public Address addAddress(Address address) {
-        return null;
+        int id = address.getId();
+        return addressMap.put(id, address);
     }
 
     @Override
     public Address getAddress(int addressId) {
-        return null;
+        return addressMap.get(addressId);
     }
 
     @Override
     public List<Address> getAllAddresses() {
-        return null;
+        return new ArrayList<>(addressMap.values());
     }
 
     @Override
     public void updateAddress(int oldAddressId, Address newAddress) {
-
+        addressMap.replace(oldAddressId, newAddress);
     }
 
     @Override
     public void removeAddress(int addressId) {
-
+        addressMap.remove(addressId);
     }
 
     /**
@@ -206,27 +209,28 @@ public class InMemoryJhsFootballDaoImpl implements JhsFootballDao {
      */
     @Override
     public Inventory addInventory(Inventory inventory) {
-        return null;
+        int id = inventory.getId();
+        return inventoryMap.put(id, inventory);
     }
 
     @Override
     public Inventory getInventory(int inventoryId) {
-        return null;
+        return inventoryMap.get(inventoryId);
     }
 
     @Override
     public List<Inventory> getAllInventory() {
-        return null;
+        return new ArrayList<>(inventoryMap.values());
     }
 
     @Override
     public void updateInventory(int oldInventoryId, Inventory newInventory) {
-
+        inventoryMap.replace(oldInventoryId, newInventory);
     }
 
     @Override
     public void removeInventory(int inventoryId) {
-
+        inventoryMap.remove(inventoryId);
     }
 
     /**
@@ -236,36 +240,31 @@ public class InMemoryJhsFootballDaoImpl implements JhsFootballDao {
      */
     @Override
     public Image addImage(Image image) {
-        return null;
+        int id = image.getId();
+        return imageMap.put(id, image);
     }
 
     @Override
     public Image getImage(int imageId) {
-        return null;
+        return imageMap.get(imageId);
     }
 
     @Override
     public List<Image> getAllImages() {
-        return null;
+        return new ArrayList<>(imageMap.values());
     }
 
     @Override
     public void updateImage(int oldImageId, Image newImage) {
-
+        imageMap.replace(oldImageId, newImage);
     }
 
     @Override
     public void removeImage(int imageId) {
-
+        imageMap.remove(imageId);
     }
 
-    /**
-     *
-     *
-     * Category
-     *
-     *
-     */
+   
 
 
 }
