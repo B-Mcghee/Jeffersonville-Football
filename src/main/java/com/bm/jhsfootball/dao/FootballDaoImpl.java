@@ -44,6 +44,31 @@ public class FootballDaoImpl implements FootballDao {
 //        userMap.remove(userId);
 //    }
 
+    @Override
+    public int insertUser(UUID id, User user) {
+        return 0;
+    }
+
+    @Override
+    public User selectUserById(UUID id) {
+        return null;
+    }
+
+    @Override
+    public List<User> getAllUsers() {
+        return null;
+    }
+
+    @Override
+    public int updateUserById(UUID id, User newUser) {
+        return 0;
+    }
+
+    @Override
+    public int removeUser(UUID id) {
+        return 0;
+    }
+
     /**
      * Category
      *

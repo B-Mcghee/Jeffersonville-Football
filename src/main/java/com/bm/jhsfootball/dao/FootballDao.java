@@ -7,11 +7,18 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface FootballDao {
-    User addUser(User user);
-    User getUser(int userId);
+    int insertUser(UUID id, User user);
+    User selectUserById(UUID id);
     List<User> getAllUsers();
-    void updateUser(int oldUserId, User newUser);
-    void removeUser(int userId);
+    int updateUserById(UUID id, User newUser);
+    int removeUser(UUID id);
+
+
+    default int insertUser(User user){
+        UUID id = UUID.randomUUID();
+        return  insertUser(id, user);
+    }
+
 
     /**
      *
