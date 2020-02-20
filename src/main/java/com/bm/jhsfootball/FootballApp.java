@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class JhsFootballApp {
+public class FootballApp {
     public static void main(String[] args) {
-        SpringApplication.run(JhsFootballApp.class, args);
+        SpringApplication.run(FootballApp.class, args);
 
     }
 }

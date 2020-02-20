@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Repository
 
-public class InMemoryJhsFootballDaoImpl implements JhsFootballDao {
+public class FootballDaoImpl implements FootballDao {
     private Map<Integer, User> userMap = new HashMap<>();
     private Map<Integer, Item> itemMap = new HashMap<>();
     private Map<Integer, Order> orderMap = new HashMap<>();
@@ -264,7 +264,7 @@ public class InMemoryJhsFootballDaoImpl implements JhsFootballDao {
         imageMap.remove(imageId);
     }
 
-   
+
 
 
 }

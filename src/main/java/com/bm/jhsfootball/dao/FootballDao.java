@@ -4,7 +4,7 @@ import com.bm.jhsfootball.dto.*;
 
 import java.util.List;
 
-public interface JhsFootballDao {
+public interface FootballDao {
     User addUser(User user);
     User getUser(int userId);
     List<User> getAllUsers();

@@ -11,4 +11,5 @@ public class Inventory {
     private int quanity;
     private int sold;
 
+
 }

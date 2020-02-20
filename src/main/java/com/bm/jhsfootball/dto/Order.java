@@ -13,4 +13,10 @@ public class Order {
     private BigDecimal totalPrice;
     private List<Integer> items;
 
+    public void orderSummary(int itemId){
+        this.items.add(itemId);
+    }
+
+
 }
+

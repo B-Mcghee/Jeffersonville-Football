@@ -15,4 +15,7 @@ public class Item {
     private String description;
     private List<Integer> images;
 
+    public void itemImages(int imageId){
+        this.images.add(imageId);
+    }
 }

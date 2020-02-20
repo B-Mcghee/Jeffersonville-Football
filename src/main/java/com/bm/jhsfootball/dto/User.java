@@ -15,4 +15,11 @@ public class User {
     private List<Role> permissions;
     private List<Order> orders;
 
+    public void addRoles(Role role){
+        this.permissions.add(role);
+    }
+
+    public void previousOrders(Order order){
+        this.orders.add(order);
+    }
 }
