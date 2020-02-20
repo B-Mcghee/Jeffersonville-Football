@@ -8,7 +8,7 @@ import java.util.*;
 @Repository
 public class FootballDaoImpl implements FootballDao {
 
-    private Map<Integer, User> userMap = new HashMap<>();
+    private static List<User> userList = new ArrayList<>();
     private static List<Item> itemList = new ArrayList<>();
     private Map<Integer, Order> orderMap = new HashMap<>();
     private Map<Integer, Role> roleMap = new HashMap<>();
@@ -18,31 +18,31 @@ public class FootballDaoImpl implements FootballDao {
     private Map<Integer, Inventory> inventoryMap = new HashMap<>();
 
 
-    @Override
-    public User addUser(User user) {
-        int userId = user.getId();
-        return userMap.put(userId, user);
-    }
-
-    @Override
-    public User getUser(int userId) {
-        return userMap.get(userId);
-    }
-
-    @Override
-    public List<User> getAllUsers() {
-        return new ArrayList<>(userMap.values());
-    }
-
-    @Override
-    public void updateUser(int oldUserId, User newUser) {
-        userMap.replace(oldUserId, newUser);
-    }
-
-    @Override
-    public void removeUser(int userId) {
-        userMap.remove(userId);
-    }
+//    @Override
+//    public User addUser(User user) {
+//        int userId = user.getId();
+//        return userList.add(user);
+//    }
+//
+//    @Override
+//    public User getUser(int userId) {
+//        return userMap.get(userId);
+//    }
+//
+//    @Override
+//    public List<User> getAllUsers() {
+//        return new ArrayList<>(userMap.values());
+//    }
+//
+//    @Override
+//    public void updateUser(int oldUserId, User newUser) {
+//        userMap.replace(oldUserId, newUser);
+//    }
+//
+//    @Override
+//    public void removeUser(int userId) {
+//        userMap.remove(userId);
+//    }
 
     /**
      * Category
