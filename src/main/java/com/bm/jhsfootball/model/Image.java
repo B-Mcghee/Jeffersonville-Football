@@ -1,4 +1,4 @@
-package com.bm.jhsfootball.dto;
+package com.bm.jhsfootball.model;
 
 import lombok.Data;
 

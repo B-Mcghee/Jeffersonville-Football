@@ -1,18 +1,15 @@
 package com.bm.jhsfootball.dao;
 
-import com.bm.jhsfootball.dto.*;
+import com.bm.jhsfootball.model.*;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Repository
-
 public class FootballDaoImpl implements FootballDao {
+
     private Map<Integer, User> userMap = new HashMap<>();
-    private Map<Integer, Item> itemMap = new HashMap<>();
+    private static List<Item> itemList = new ArrayList<>();
     private Map<Integer, Order> orderMap = new HashMap<>();
     private Map<Integer, Role> roleMap = new HashMap<>();
     private Map<Integer, Image> imageMap = new HashMap<>();
@@ -85,28 +82,57 @@ public class FootballDaoImpl implements FootballDao {
      */
     @Override
     public Item addItem(Item item) {
-        int id = item.getId();
-        return itemMap.put(id, item);
+        return null;
     }
 
     @Override
     public Item getItem(int itemId) {
-        return itemMap.get(itemId);
+        return itemList.get(itemId);
     }
 
     @Override
     public List<Item> getAllItems() {
-        return new ArrayList<>(itemMap.values());
+        return itemList;
     }
 
     @Override
-    public void updateItem(int oldItemId, Item newItem) {
-        itemMap.replace(oldItemId, newItem);
+    public Optional<Item> selectItemById(UUID id) {
+        return itemList.stream()
+                .filter(item -> item.getId().equals(id))
+                .findFirst();
+
     }
 
     @Override
-    public void removeItem(int itemId) {
-        itemMap.remove(itemId);
+    public int updateItemById(UUID id, Item newItem) {
+        return 0;
+    }
+
+    @Override
+    public int removeItem(UUID id) {
+        Optional<Item> itemMaybe = selectItemById(id);
+        if(itemMaybe.isEmpty()){
+        return 0;}
+        itemList.remove(id);
+        return 1;
+
+    }
+
+//    @Override
+//    public int updateItemById(UUID id, Item newItem) {
+//        //itemList.re(oldItemId, newItem);
+//        return 0;
+//    }
+
+//    @Override
+//    public void removeItem(int itemId) {
+//        itemList.remove(itemId);
+//    }
+
+    @Override
+    public int insertItem(UUID id, Item item) {
+        itemList.add(new Item(id, item.getCategoryId(), item.getTitle()));
+        return 1;
     }
 
     /**

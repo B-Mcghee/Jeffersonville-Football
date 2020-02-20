@@ -1,8 +1,10 @@
 package com.bm.jhsfootball.dao;
 
-import com.bm.jhsfootball.dto.*;
+import com.bm.jhsfootball.model.*;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface FootballDao {
     User addUser(User user);
@@ -32,9 +34,15 @@ public interface FootballDao {
     Item addItem(Item item);
     Item getItem(int itemId);
     List<Item> getAllItems();
-    void updateItem(int oldItemId, Item newItem);
-    void removeItem(int itemId);
+    Optional<Item> selectItemById(UUID id);
+    int updateItemById(UUID id, Item newItem);
+    int removeItem(UUID id);
+    int insertItem(UUID id, Item item);
 
+    default int insertItem(Item item){
+        UUID id = UUID.randomUUID();
+        return  insertItem(id, item);
+    }
     /**
      *
      * Order

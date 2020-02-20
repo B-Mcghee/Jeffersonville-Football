@@ -1,12 +1,9 @@
-package com.bm.jhsfootball.dto;
+package com.bm.jhsfootball.model;
 
 import lombok.Data;
 
 @Data
-public class Category {
+public class Role {
     private int id;
     private String type;
-
-
-
 }
