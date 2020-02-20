@@ -8,7 +8,7 @@ import java.util.*;
 @Repository
 public class FootballDaoImpl implements FootballDao {
 
-    private static List<User> userList = new ArrayList<>();
+    private static Map<UUID,User> userMap = new HashMap<>();
     private static List<Item> itemList = new ArrayList<>();
     private Map<Integer, Order> orderMap = new HashMap<>();
     private Map<Integer, Role> roleMap = new HashMap<>();
@@ -46,27 +46,87 @@ public class FootballDaoImpl implements FootballDao {
 
     @Override
     public int insertUser(UUID id, User user) {
-        return 0;
+        userMap.put(id, user);
+        return 1;
     }
 
     @Override
-    public User selectUserById(UUID id) {
-        return null;
+    public Optional<User> selectUserById(UUID id) {
+        return userMap.values().stream().filter(user -> user.getId().equals(id)).findFirst();
     }
 
     @Override
     public List<User> getAllUsers() {
-        return null;
+        return new ArrayList<>(userMap.values());
     }
 
     @Override
     public int updateUserById(UUID id, User newUser) {
-        return 0;
+        userMap.replace(id, newUser);
+        return 1;
     }
 
     @Override
     public int removeUser(UUID id) {
+        Optional<User> userMaybe = selectUserById(id);
+        if(userMaybe.isEmpty()){
+            return 0;}
+        itemList.remove(id);
+        return 1;
+    }
+
+    /**
+     * Item
+     *
+     * @param
+     */
+
+
+
+
+    @Override
+    public List<Item> getAllItems() {
+        return itemList;
+    }
+
+    @Override
+    public Optional<Item> selectItemById(UUID id) {
+        return itemList.stream()
+                .filter(item -> item.getId().equals(id))
+                .findFirst();
+
+    }
+
+    @Override
+    public int updateItemById(UUID id, Item newItem) {
         return 0;
+    }
+
+    @Override
+    public int removeItem(UUID id) {
+        Optional<Item> itemMaybe = selectItemById(id);
+        if(itemMaybe.isEmpty()){
+            return 0;}
+        itemList.remove(id);
+        return 1;
+
+    }
+
+//    @Override
+//    public int updateItemById(UUID id, Item newItem) {
+//        //itemList.re(oldItemId, newItem);
+//        return 0;
+//    }
+
+//    @Override
+//    public void removeItem(int itemId) {
+//        itemList.remove(itemId);
+//    }
+
+    @Override
+    public int insertItem(UUID id, Item item) {
+        itemList.add(new Item(id, item.getCategoryId(), item.getTitle()));
+        return 1;
     }
 
     /**
@@ -98,66 +158,6 @@ public class FootballDaoImpl implements FootballDao {
     @Override
     public void removeCategory(int categoryId) {
         categoryMap.remove(categoryId);
-    }
-
-    /**
-     * Item
-     *
-     * @param item
-     */
-    @Override
-    public Item addItem(Item item) {
-        return null;
-    }
-
-    @Override
-    public Item getItem(int itemId) {
-        return itemList.get(itemId);
-    }
-
-    @Override
-    public List<Item> getAllItems() {
-        return itemList;
-    }
-
-    @Override
-    public Optional<Item> selectItemById(UUID id) {
-        return itemList.stream()
-                .filter(item -> item.getId().equals(id))
-                .findFirst();
-
-    }
-
-    @Override
-    public int updateItemById(UUID id, Item newItem) {
-        return 0;
-    }
-
-    @Override
-    public int removeItem(UUID id) {
-        Optional<Item> itemMaybe = selectItemById(id);
-        if(itemMaybe.isEmpty()){
-        return 0;}
-        itemList.remove(id);
-        return 1;
-
-    }
-
-//    @Override
-//    public int updateItemById(UUID id, Item newItem) {
-//        //itemList.re(oldItemId, newItem);
-//        return 0;
-//    }
-
-//    @Override
-//    public void removeItem(int itemId) {
-//        itemList.remove(itemId);
-//    }
-
-    @Override
-    public int insertItem(UUID id, Item item) {
-        itemList.add(new Item(id, item.getCategoryId(), item.getTitle()));
-        return 1;
     }
 
     /**

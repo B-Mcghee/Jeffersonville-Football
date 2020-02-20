@@ -19,9 +19,9 @@ public class FootballService {
         this.footballDao = footballDao;
     }
 
-    public User addUser(User user) {
-        footballDao.addUser(user);
-        return user;
+    public int insertUser(User user) {
+        return footballDao.insertUser(user);
+
     }
 
     

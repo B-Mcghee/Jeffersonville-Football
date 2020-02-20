@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface FootballDao {
     int insertUser(UUID id, User user);
-    User selectUserById(UUID id);
+    Optional<User> selectUserById(UUID id);
     List<User> getAllUsers();
     int updateUserById(UUID id, User newUser);
     int removeUser(UUID id);
@@ -38,8 +38,8 @@ public interface FootballDao {
      *
      */
 
-    Item addItem(Item item);
-    Item getItem(int itemId);
+
+
     List<Item> getAllItems();
     Optional<Item> selectItemById(UUID id);
     int updateItemById(UUID id, Item newItem);
