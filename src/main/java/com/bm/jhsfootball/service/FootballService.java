@@ -48,4 +48,24 @@ public class FootballService {
     public Optional<Item> getItemById(UUID id){
         return footballDao.selectItemById(id);
     }
+    public void updateItem(UUID id, Item item) {
+        footballDao.updateItemById(id, item);
+    }
+
+    public void removeItem(UUID id){
+        footballDao.removeItem(id);
+    }
+    public List<User> getAllUsers() {
+        return footballDao.getAllUsers();
+    }
+
+    public Optional<User> getUserById(UUID id) {
+        return footballDao.selectUserById(id);
+    }
+
+    public void updateUserById(UUID id, User newUser){
+        footballDao.updateUserById(id, newUser);
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.bm.jhsfootball.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.List;
@@ -12,17 +13,24 @@ public class User {
     private String firstName;
     private String lastName;
     private String password;
-    private String userName;
+    private String username;
     private String email;
     private List<Role> permissions;
     private List<Order> orders;
 
-    public User(UUID id, String firstName, String lastName, String password, String userName, String email, List<Role> permissions, List<Order> orders) {
+    public User(@JsonProperty("id")UUID id,
+                @JsonProperty("firstName")String firstName,
+                @JsonProperty("lastName")String lastName,
+                @JsonProperty("password")String password,
+                @JsonProperty("username")String username,
+                @JsonProperty("email")String email,
+                @JsonProperty("permissions")List<Role> permissions,
+                @JsonProperty("orders")List<Order> orders) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.userName = userName;
+        this.username = username;
         this.email = email;
         this.permissions = permissions;
         this.orders = orders;

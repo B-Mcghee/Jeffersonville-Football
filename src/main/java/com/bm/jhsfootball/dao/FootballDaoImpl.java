@@ -46,13 +46,18 @@ public class FootballDaoImpl implements FootballDao {
 
     @Override
     public int insertUser(UUID id, User user) {
+        user.setId(id);
         userMap.put(id, user);
         return 1;
     }
 
     @Override
     public Optional<User> selectUserById(UUID id) {
-        return userMap.values().stream().filter(user -> user.getId().equals(id)).findFirst();
+        return userMap.values()
+                .stream()
+                .filter(user -> user.getId()
+                        .equals(id))
+                .findFirst();
     }
 
     @Override
@@ -62,8 +67,15 @@ public class FootballDaoImpl implements FootballDao {
 
     @Override
     public int updateUserById(UUID id, User newUser) {
-        userMap.replace(id, newUser);
-        return 1;
+             return selectUserById(id).map(user -> {
+                 boolean flag = userMap.containsKey(id);
+                 if(flag){
+                     userMap.replace(id, newUser);
+                     return 1;
+                 }
+                 return 0;
+             }).orElse(0);
+
     }
 
     @Override
@@ -71,7 +83,7 @@ public class FootballDaoImpl implements FootballDao {
         Optional<User> userMaybe = selectUserById(id);
         if(userMaybe.isEmpty()){
             return 0;}
-        itemList.remove(id);
+        userMap.remove(id);
         return 1;
     }
 
@@ -99,7 +111,17 @@ public class FootballDaoImpl implements FootballDao {
 
     @Override
     public int updateItemById(UUID id, Item newItem) {
-        return 0;
+        return selectItemById(id)
+                .map(i -> {
+                    int itemIndex = itemList.indexOf(newItem);
+                    if (itemIndex >= 0){
+                        itemList.set(itemIndex, newItem);
+                        return 1;
+                    }
+                    return 0;
+                })
+                .orElse(0);
+
     }
 
     @Override
