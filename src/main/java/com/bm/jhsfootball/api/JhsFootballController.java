@@ -6,6 +6,8 @@ import com.bm.jhsfootball.service.FootballService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
@@ -59,7 +61,7 @@ public class JhsFootballController {
      *
      */
     @PostMapping(path = "/user")
-    public void addUser(@RequestBody User user){
+    public void addUser(@Valid @NotNull @RequestBody User user){
         service.insertUser(user);
     }
 
@@ -75,8 +77,13 @@ public class JhsFootballController {
     }
 
     @PutMapping(path = "/user/{id}")
-    public void updateUserById(@PathVariable UUID id, @RequestBody User newUser){
+    public void updateUserById(@PathVariable UUID id, @Valid @NotNull @RequestBody User newUser){
         service.updateUserById(id, newUser);
+    }
+
+    @DeleteMapping(path = "/user/{id}")
+    public void removeUserById(@PathVariable UUID id){
+        service.removeUserById(id);
     }
 
 }

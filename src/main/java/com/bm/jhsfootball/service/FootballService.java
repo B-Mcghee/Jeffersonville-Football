@@ -3,6 +3,8 @@ package com.bm.jhsfootball.service;
 import com.bm.jhsfootball.dao.FootballDao;
 import com.bm.jhsfootball.model.Item;
 import com.bm.jhsfootball.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +16,8 @@ import java.util.stream.Collectors;
 public class FootballService {
 
     private final FootballDao footballDao;
-
-    public FootballService(FootballDao footballDao) {
+    @Autowired
+    public FootballService(@Qualifier("inMemory") FootballDao footballDao) {
         this.footballDao = footballDao;
     }
 
@@ -68,4 +70,7 @@ public class FootballService {
     }
 
 
+    public void removeUserById(UUID id) {
+        footballDao.removeUser(id);
+    }
 }
