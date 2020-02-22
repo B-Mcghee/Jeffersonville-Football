@@ -1,6 +1,5 @@
 package com.bm.jhsfootball.api;
 
-import com.bm.jhsfootball.model.Item;
 import com.bm.jhsfootball.model.User;
 import com.bm.jhsfootball.service.FootballService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,49 +10,17 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("api/redpride")
+
+@RequestMapping("/api/redpride")
 @RestController
-public class JhsFootballController {
+public class UserController {
 
-    private final FootballService service;
-
+    private FootballService service;
 
     @Autowired
-    public JhsFootballController(FootballService service) {
+    public UserController(FootballService service){
         this.service = service;
     }
-
-    /**
-     *
-     * Items
-     *
-     */
-    @PostMapping(path = "/item")
-    public void addItem(@RequestBody Item item){
-        service.insertItem(item);
-    }
-
-    @GetMapping(path = "/item")
-    public List<Item> getAllItems(){
-        return service.getAllItems();
-    }
-
-    @GetMapping(path = "/item/{id}")
-    public Item getItemById(@PathVariable("id") UUID id){
-        return service.getItemById(id)
-                .orElse(null);
-    }
-
-    @PutMapping(path = "item/{id}")
-    public void updateItem(@PathVariable("id")UUID id, @RequestBody Item item){
-        service.updateItem(id, item);
-    }
-
-    @DeleteMapping(path = "/item/{id}")
-    public void removeItem(@PathVariable("id")UUID id){
-        service.removeItem(id);
-    }
-
 
     /**
      *
@@ -85,5 +52,4 @@ public class JhsFootballController {
     public void removeUserById(@PathVariable UUID id){
         service.removeUserById(id);
     }
-
 }

@@ -2,6 +2,7 @@ package com.bm.jhsfootball.service;
 
 import com.bm.jhsfootball.dao.FootballDao;
 import com.bm.jhsfootball.model.Item;
+import com.bm.jhsfootball.model.Order;
 import com.bm.jhsfootball.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -57,6 +58,9 @@ public class FootballService {
     public void removeItem(UUID id){
         footballDao.removeItem(id);
     }
+
+
+
     public List<User> getAllUsers() {
         return footballDao.getAllUsers();
     }
@@ -72,5 +76,27 @@ public class FootballService {
 
     public void removeUserById(UUID id) {
         footballDao.removeUser(id);
+    }
+
+    public void insertOrder(Order order) {
+        footballDao.insertOrder(order);
+    }
+
+
+
+    public List<Order> getAllOrders() {
+        return footballDao.getAllOrders();
+    }
+
+    public Optional<Order> getOrderById(UUID id) {
+        return footballDao.getOrderById(id);
+    }
+
+    public void updateOrderById(UUID id, Order newOrder) {
+        footballDao.updateOrder(id, newOrder);
+    }
+
+    public void removeOrderById(UUID id) {
+        footballDao.removeOrder(id);
     }
 }

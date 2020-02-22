@@ -4,10 +4,11 @@ import lombok.Data;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 @Data
 public class Order {
-    private int id;
+    private UUID id;
     private int userId;
     private int status;
     private BigDecimal totalPrice;

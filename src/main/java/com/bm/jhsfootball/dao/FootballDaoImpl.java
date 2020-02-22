@@ -10,7 +10,7 @@ public class FootballDaoImpl implements FootballDao {
 
     private static Map<UUID,User> userMap = new HashMap<>();
     private static List<Item> itemList = new ArrayList<>();
-    private Map<Integer, Order> orderMap = new HashMap<>();
+    private static Map<UUID, Order> orderMap = new HashMap<>();
     private Map<Integer, Role> roleMap = new HashMap<>();
     private Map<Integer, Image> imageMap = new HashMap<>();
     private Map<Integer, Category> categoryMap = new HashMap<>();
@@ -126,6 +126,17 @@ public class FootballDaoImpl implements FootballDao {
     }
 
     /**
+     * Order
+     *
+     * @param id
+     * @param order
+     */
+    @Override
+    public int insertOrder(UUID id, Order order) {
+        return 0;
+    }
+
+    /**
      * Category
      *
      * @param category
@@ -159,17 +170,18 @@ public class FootballDaoImpl implements FootballDao {
     /**
      * Order
      *
-     * @param order
+     * @param
      */
-    @Override
-    public Order addOrder(Order order) {
-        int id = order.getId();
-        return orderMap.put(id, order);
-    }
+
 
     @Override
-    public Order getOrder(int orderId) {
-        return orderMap.get(orderId);
+    public Optional<Order> selectOrderById(UUID id) {
+        return orderMap.values()
+                .stream()
+                .filter(order -> order.getId()
+                        .equals(id))
+                .findFirst();
+
     }
 
     @Override
@@ -178,14 +190,25 @@ public class FootballDaoImpl implements FootballDao {
     }
 
     @Override
-    public void updateOrder(int oldOrderId, Order newOrder) {
-        orderMap.replace(oldOrderId, newOrder);
+    public int updateOrder(UUID id, Order newOrder) {
+        Optional<Order> oldOrder = selectOrderById(id);
+        return oldOrder.map(order -> {
+            if (orderMap.containsKey(id)){
+                orderMap.replace(id, newOrder);
+                return 1;
+            } return 0;
+                }
+
+        ).stream().findFirst().orElse(0);
     }
 
     @Override
-    public void removeOrder(int orderId) {
-        orderMap.remove(orderId);
+    public void removeOrder(UUID id) {
+
     }
+
+
+
 
     /**
      * Role

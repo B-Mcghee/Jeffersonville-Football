@@ -56,12 +56,16 @@ public interface FootballDao {
      *
      */
 
-    Order addOrder(Order order);
-    Order getOrder(int orderId);
+    int insertOrder(UUID id, Order order);
+    Optional<Order> selectOrderById(UUID id);
     List<Order> getAllOrders();
-    void updateOrder(int oldOrderId, Order newOrder);
-    void removeOrder(int orderId);
+    int updateOrder(UUID id, Order newOrder);
+    void removeOrder(UUID id);
 
+    default  int insertOrder(Order order){
+        UUID id = UUID.randomUUID();
+        return insertOrder(id, order);
+    }
     /**
      *
      * Role
