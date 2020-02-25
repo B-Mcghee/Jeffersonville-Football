@@ -101,9 +101,8 @@ public class FootballDataAcessService implements FootballDao{
                 .stream()
                 .filter(item -> item.getId().equals(id)).findFirst();
     }
-
-    @Transactional
     @Override
+    @Transactional
     public int updateItemById(UUID id, Item newItem) {
         final String UPDATE_ITEM = "update items set " +
                 "category_id = ?," +
@@ -120,12 +119,19 @@ public class FootballDataAcessService implements FootballDao{
 
     @Override
     public int removeItem(UUID id) {
-        return 0;
+        final String DELETE_ITEM = "Delete item where id = ?";
+        heySql.update(DELETE_ITEM, id);
+        return 1;
     }
-
     @Override
+    @Transactional
     public int insertItem(UUID id, Item item) {
-        return 0;
+        final String insertItem = "insert into Items(id,category_id, title, size, price, description ) " +
+                "values(?,?,?,?,?,?)";
+        item.setId(id);
+
+        return heySql.update(insertItem, item.getId().toString(), item.getCategoryId(), item.getTitle(), item.getSize(), item.getPrice(), item.getDescription());
+
     }
 
     /**
