@@ -6,6 +6,7 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,22 +89,33 @@ public class FootballDataAcessService implements FootballDao{
      */
     @Override
     public List<Item> getAllItems() {
-        String getAllItems = "select * from items";
-        List<Item> allItems = heySql.query(getAllItems,new ItemMapper() );
-        return allItems;
+        final String GET_ALL_ITEMS = "select * from items";
+        return heySql.query(GET_ALL_ITEMS,new ItemMapper() );
+
     }
 
     @Override
     public Optional<Item> selectItemById(UUID id) {
-        String selectItem = "select * from items";
-        return heySql.query(selectItem, new ItemMapper())
+        final String SELECT_ITEM = "select * from items";
+        return heySql.query(SELECT_ITEM, new ItemMapper())
                 .stream()
                 .filter(item -> item.getId().equals(id)).findFirst();
     }
 
+    @Transactional
     @Override
     public int updateItemById(UUID id, Item newItem) {
-        return 0;
+        final String UPDATE_ITEM = "update items set " +
+                "category_id = ?," +
+                "title = ?," +
+                "size = ?, " +
+                "price = ?," +
+                "description = ? " +
+                "where id = ?";
+        heySql.update(UPDATE_ITEM, newItem.getCategoryId(), newItem.getTitle(), newItem.getSize(), newItem.getPrice(), newItem.getDescription(), id.toString());
+        return 1;
+
+
     }
 
     @Override
