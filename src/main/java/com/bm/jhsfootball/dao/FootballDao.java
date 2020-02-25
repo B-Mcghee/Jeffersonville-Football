@@ -26,12 +26,16 @@ public interface FootballDao {
      *
      */
     
-    Category addCategory(Category category);
-    Category getCategory(int categoryId);
+    int addCategory(Category category);
+    Optional<Category> getCategory(UUID categoryId);
     List<Category> getAllCategories();
-    void updateCategory(int oldCategoryId, Category category);
-    void removeCategory(int categoryId);
+    int updateCategory(UUID oldCategoryId, Category category);
+    int removeCategory(UUID categoryId);
 
+    default int insertCategory(User user){
+        UUID id = UUID.randomUUID();
+        return  insertUser(id, user);
+    }
     /**
      *
      * Item
@@ -60,7 +64,7 @@ public interface FootballDao {
     Optional<Order> selectOrderById(UUID id);
     List<Order> getAllOrders();
     int updateOrder(UUID id, Order newOrder);
-    void removeOrder(UUID id);
+    int removeOrder(UUID id);
 
     default  int insertOrder(Order order){
         UUID id = UUID.randomUUID();
@@ -72,11 +76,16 @@ public interface FootballDao {
      *
      */
 
-    Role addRole(Role role);
-    Role getRole(int roleId);
+    int insertRole(UUID id, Role role);
+    Optional<Role> selectRoleById(UUID roleId);
     List<Role> getAllRoles();
-    void updateRole(int oldRoleId, Role newRole);
-    void removeRole(int roleId);
+    int updateRole(UUID oldRoleId, Role newRole);
+    int removeRole(UUID roleId);
+
+    default int insertRole(Role role){
+        UUID id = UUID.randomUUID();
+        return  insertRole(id, role);
+    }
 
     /**
      *
@@ -94,23 +103,28 @@ public interface FootballDao {
      * Inventory
      *
      */
-    Inventory addInventory(Inventory inventory);
-    Inventory getInventory(int inventoryId);
+    int insertInventory(UUID inventoryId, Inventory inventory);
+    Optional<Inventory> getInventory(UUID inventoryId);
     List<Inventory> getAllInventory();
-    void updateInventory(int oldInventoryId, Inventory newInventory);
-    void removeInventory(int inventoryId);
+    int updateInventory(UUID oldInventoryId, Inventory newInventory);
+    int removeInventory(UUID inventoryId);
 
     /**
      *
      * Image
      *
      */
-    Image addImage(Image image);
-    Image getImage(int imageId);
+    int insertImage(UUID id, Image image);
+    Optional<Image> selectImageById(UUID imageId);
     List<Image> getAllImages();
-    void updateImage(int oldImageId, Image newImage);
-    void removeImage(int imageId);
-    
-    
+    int updateImageById(UUID id, Image newImage);
+    int removeImage(UUID id);
+
+    default  int insertImage(Image image){
+        UUID id = UUID.randomUUID();
+        return insertImage(id, image);
+    }
+
+
     
 }

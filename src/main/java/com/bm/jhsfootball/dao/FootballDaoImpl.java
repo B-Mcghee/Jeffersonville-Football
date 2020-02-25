@@ -11,11 +11,11 @@ public class FootballDaoImpl implements FootballDao {
     private static Map<UUID,User> userMap = new HashMap<>();
     private static List<Item> itemList = new ArrayList<>();
     private static Map<UUID, Order> orderMap = new HashMap<>();
-    private Map<Integer, Role> roleMap = new HashMap<>();
-    private Map<Integer, Image> imageMap = new HashMap<>();
-    private Map<Integer, Category> categoryMap = new HashMap<>();
-    private Map<Integer, Address> addressMap = new HashMap<>();
-    private Map<Integer, Inventory> inventoryMap = new HashMap<>();
+    private static Map<UUID, Role> roleMap = new HashMap<>();
+    private static Map<UUID, Image> imageMap = new HashMap<>();
+    private static Map<UUID, Category> categoryMap = new HashMap<>();
+    private static Map<UUID, Address> addressMap = new HashMap<>();
+    private static Map<UUID, Inventory> inventoryMap = new HashMap<>();
 
 
     @Override
@@ -59,6 +59,36 @@ public class FootballDaoImpl implements FootballDao {
             return 0;}
         userMap.remove(id);
         return 1;
+    }
+
+    /**
+     * Category
+     *
+     * @param category
+     */
+    @Override
+    public int addCategory(Category category) {
+        return 0;
+    }
+
+    @Override
+    public Optional<Category> getCategory(UUID categoryId) {
+        return null;
+    }
+
+    @Override
+    public List<Category> getAllCategories() {
+        return null;
+    }
+
+    @Override
+    public int updateCategory(UUID oldCategoryId, Category category) {
+        return 0;
+    }
+
+    @Override
+    public int removeCategory(UUID categoryId) {
+        return 0;
     }
 
     /**
@@ -108,16 +138,7 @@ public class FootballDaoImpl implements FootballDao {
 
     }
 
-//    @Override
-//    public int updateItemById(UUID id, Item newItem) {
-//        //itemList.re(oldItemId, newItem);
-//        return 0;
-//    }
 
-//    @Override
-//    public void removeItem(int itemId) {
-//        itemList.remove(itemId);
-//    }
 
     @Override
     public int insertItem(UUID id, Item item) {
@@ -125,54 +146,47 @@ public class FootballDaoImpl implements FootballDao {
         return 1;
     }
 
-    /**
-     * Order
-     *
-     * @param id
-     * @param order
-     */
-    @Override
-    public int insertOrder(UUID id, Order order) {
-        return 0;
-    }
 
     /**
      * Category
      *
      * @param category
      */
-    @Override
-    public Category addCategory(Category category) {
-        int id = category.getId();
-        return categoryMap.put(id, category);
-    }
-
-    @Override
-    public Category getCategory(int categoryId) {
-        return categoryMap.get(categoryId);
-    }
-
-    @Override
-    public List<Category> getAllCategories() {
-        return new ArrayList<>(categoryMap.values());
-    }
-
-    @Override
-    public void updateCategory(int oldCategoryId, Category category) {
-        categoryMap.replace(oldCategoryId, category);
-    }
-
-    @Override
-    public void removeCategory(int categoryId) {
-        categoryMap.remove(categoryId);
-    }
+//    @Override
+//    public Category addCategory(Category category) {
+//        int id = category.getId();
+//        return categoryMap.put(id, category);
+//    }
+//
+//    @Override
+//    public Category getCategory(int categoryId) {
+//        return categoryMap.get(categoryId);
+//    }
+//
+//    @Override
+//    public List<Category> getAllCategories() {
+//        return new ArrayList<>(categoryMap.values());
+//    }
+//
+//    @Override
+//    public void updateCategory(UUID oldCategoryId, Category category) {
+//        categoryMap.replace(oldCategoryId, category);
+//    }
+//
+//    @Override
+//    public void removeCategory(int categoryId) {
+//        categoryMap.remove(categoryId);
+//    }
 
     /**
      * Order
      *
      * @param
      */
-
+    @Override
+    public int insertOrder(UUID id, Order order) {
+        return 0;
+    }
 
     @Override
     public Optional<Order> selectOrderById(UUID id) {
@@ -198,17 +212,17 @@ public class FootballDaoImpl implements FootballDao {
                 return 1;
             } return 0;
                 }
-
         ).stream().findFirst().orElse(0);
     }
 
     @Override
-    public void removeOrder(UUID id) {
-
+    public int removeOrder(UUID id) {
+        Optional<Order> orderMaybe = selectOrderById(id);
+        if(orderMaybe.isPresent()){
+            orderMap.remove(id);
+            return 1;
+        }return 0;
     }
-
-
-
 
     /**
      * Role
@@ -216,14 +230,16 @@ public class FootballDaoImpl implements FootballDao {
      * @param role
      */
     @Override
-    public Role addRole(Role role) {
-        int id = role.getId();
-        return roleMap.put(id, role);
+    public int insertRole(UUID id, Role role) {
+        roleMap.put(id, role);
+        return 1;
     }
 
     @Override
-    public Role getRole(int roleId) {
-        return roleMap.get(roleId);
+    public Optional<Role> selectRoleById(UUID roleId) {
+        return roleMap.values().stream()
+                .filter(role -> role.getId().equals(roleId))
+                .findFirst();
     }
 
     @Override
@@ -232,13 +248,25 @@ public class FootballDaoImpl implements FootballDao {
     }
 
     @Override
-    public void updateRole(int oldRoleId, Role newRole) {
-        roleMap.replace(oldRoleId, newRole);
+    public int updateRole(UUID oldRoleId, Role newRole) {
+        Optional<Role> oldRole = selectRoleById(oldRoleId);
+            return oldRole.map(role -> {
+                if (roleMap.containsKey(oldRoleId)) {
+                    roleMap.replace(oldRoleId, newRole);
+                    return 1;
+                }return 0; }
+                ).stream().findFirst().orElse(0);
     }
 
     @Override
-    public void removeRole(int roleId) {
-        roleMap.remove(roleId);
+    public int removeRole(UUID roleId) {
+        Optional<Role> roleMaybe = selectRoleById(roleId);
+
+            if (roleMaybe.isPresent()){
+                roleMap.remove(roleId);
+                return 1;
+            } return 0;
+
     }
 
     /**
@@ -248,28 +276,27 @@ public class FootballDaoImpl implements FootballDao {
      */
     @Override
     public Address addAddress(Address address) {
-        int id = address.getId();
-        return addressMap.put(id, address);
+        return null;
     }
 
     @Override
     public Address getAddress(int addressId) {
-        return addressMap.get(addressId);
+        return null;
     }
 
     @Override
     public List<Address> getAllAddresses() {
-        return new ArrayList<>(addressMap.values());
+        return null;
     }
 
     @Override
     public void updateAddress(int oldAddressId, Address newAddress) {
-        addressMap.replace(oldAddressId, newAddress);
+
     }
 
     @Override
     public void removeAddress(int addressId) {
-        addressMap.remove(addressId);
+
     }
 
     /**
@@ -278,46 +305,131 @@ public class FootballDaoImpl implements FootballDao {
      * @param inventory
      */
     @Override
-    public Inventory addInventory(Inventory inventory) {
-        int id = inventory.getId();
-        return inventoryMap.put(id, inventory);
+    public int insertInventory(UUID id, Inventory inventory) {
+        return 0;
     }
 
     @Override
-    public Inventory getInventory(int inventoryId) {
-        return inventoryMap.get(inventoryId);
+    public Optional<Inventory> getInventory(UUID inventoryId) {
+        return null;
     }
 
     @Override
     public List<Inventory> getAllInventory() {
-        return new ArrayList<>(inventoryMap.values());
+        return null;
     }
 
     @Override
-    public void updateInventory(int oldInventoryId, Inventory newInventory) {
-        inventoryMap.replace(oldInventoryId, newInventory);
+    public int updateInventory(UUID oldInventoryId, Inventory newInventory) {
+        return 0;
     }
 
     @Override
-    public void removeInventory(int inventoryId) {
-        inventoryMap.remove(inventoryId);
+    public int removeInventory(UUID inventoryId) {
+        return 0;
     }
 
+
+    /**
+     * Role
+     *
+     * @param role
+     */
+//    @Override
+//    public Role addRole(Role role) {
+//        int id = role.getId();
+//        return roleMap.put(id, role);
+//    }
+//
+//    @Override
+//    public Role getRole(int roleId) {
+//        return roleMap.get(roleId);
+//    }
+//
+//    @Override
+//    public List<Role> getAllRoles() {
+//        return new ArrayList<>(roleMap.values());
+//    }
+//
+//    @Override
+//    public void updateRole(int oldRoleId, Role newRole) {
+//        roleMap.replace(oldRoleId, newRole);
+//    }
+//
+//    @Override
+//    public void removeRole(int roleId) {
+//        roleMap.remove(roleId);
+//    }
+
+    /**
+     * Address
+     *
+     * @param address
+     */
+//    @Override
+//    public Address addAddress(Address address) {
+//        int id = address.getId();
+//        return addressMap.put(id, address);
+//    }
+//
+//    @Override
+//    public Address getAddress(int addressId) {
+//        return addressMap.get(addressId);
+//    }
+//
+//    @Override
+//    public List<Address> getAllAddresses() {
+//        return new ArrayList<>(addressMap.values());
+//    }
+//
+//    @Override
+//    public void updateAddress(int oldAddressId, Address newAddress) {
+//        addressMap.replace(oldAddressId, newAddress);
+//    }
+//
+//    @Override
+//    public void removeAddress(int addressId) {
+//        addressMap.remove(addressId);
+//    }
+
+    /**
+     * Inventory
+     *
+     * @param inventory
+     */
+//    @Override
+//    public Inventory addInventory(Inventory inventory) {
+//        int id = inventory.getId();
+//        return inventoryMap.put(id, inventory);
+//    }
+//
+//    @Override
+//    public Inventory getInventory(int inventoryId) {
+//        return inventoryMap.get(inventoryId);
+//    }
+//
+//    @Override
+//    public List<Inventory> getAllInventory() {
+//        return new ArrayList<>(inventoryMap.values());
+//    }
+//
+//    @Override
+//    public void updateInventory(int oldInventoryId, Inventory newInventory) {
+//        inventoryMap.replace(oldInventoryId, newInventory);
+//    }
+//
+//    @Override
+//    public void removeInventory(int inventoryId) {
+//        inventoryMap.remove(inventoryId);
+//    }
     /**
      * Image
      *
-     * @param image
+     * @param
      */
-    @Override
-    public Image addImage(Image image) {
-        int id = image.getId();
-        return imageMap.put(id, image);
-    }
 
-    @Override
-    public Image getImage(int imageId) {
-        return imageMap.get(imageId);
-    }
+
+
 
     @Override
     public List<Image> getAllImages() {
@@ -325,13 +437,42 @@ public class FootballDaoImpl implements FootballDao {
     }
 
     @Override
-    public void updateImage(int oldImageId, Image newImage) {
-        imageMap.replace(oldImageId, newImage);
+    public Optional<Image> selectImageById(UUID id) {
+        return imageMap.values().stream()
+                .filter(i -> i.getId()
+                        .equals(id))
+                .findFirst();
     }
 
     @Override
-    public void removeImage(int imageId) {
-        imageMap.remove(imageId);
+    public int updateImageById(UUID id, Image newImage) {
+        return selectImageById(id)
+                .map(i -> {
+                    if (imageMap.containsKey(id)) {
+                        imageMap.replace(id, newImage);
+                        return 1;
+                    }
+                return 0;
+                })
+                .orElse(0);
+    }
+
+    @Override
+    public int removeImage(UUID id) {
+        Optional<Image> imageMaybe = selectImageById(id);
+        if(imageMaybe.isEmpty()){
+            return 0;}
+        imageMap.remove(id);
+        return 1;
+
+    }
+
+
+
+    @Override
+    public int insertImage(UUID id, Image image) {
+        imageMap.put(id, image);
+        return 1;
     }
 
 

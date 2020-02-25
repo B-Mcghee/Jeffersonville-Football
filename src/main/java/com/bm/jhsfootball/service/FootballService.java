@@ -89,7 +89,7 @@ public class FootballService {
     }
 
     public Optional<Order> getOrderById(UUID id) {
-        return footballDao.getOrderById(id);
+        return footballDao.selectOrderById(id);
     }
 
     public void updateOrderById(UUID id, Order newOrder) {

@@ -10,6 +10,8 @@ import java.util.UUID;
 
 @Repository("mySql")
 public class FootballDataAcessService implements FootballDao{
+
+
     @Override
     public int insertUser(UUID id, User user) {
         return 0;
@@ -39,18 +41,19 @@ public class FootballDataAcessService implements FootballDao{
         return 0;
     }
 
+
     /**
      * Category
      *
      * @param category
      */
     @Override
-    public Category addCategory(Category category) {
-        return null;
+    public int addCategory(Category category) {
+        return 0;
     }
 
     @Override
-    public Category getCategory(int categoryId) {
+    public Optional<Category> getCategory(UUID categoryId) {
         return null;
     }
 
@@ -60,13 +63,13 @@ public class FootballDataAcessService implements FootballDao{
     }
 
     @Override
-    public void updateCategory(int oldCategoryId, Category category) {
-
+    public int updateCategory(UUID id, Category category) {
+        return 0;
     }
 
     @Override
-    public void removeCategory(int categoryId) {
-
+    public int removeCategory(UUID categoryId) {
+        return 0;
     }
 
     /**
@@ -100,16 +103,17 @@ public class FootballDataAcessService implements FootballDao{
     /**
      * Order
      *
+     * @param id
      * @param order
      */
     @Override
-    public Order addOrder(Order order) {
-        return null;
+    public int insertOrder(UUID id, Order order) {
+        return 0;
     }
 
     @Override
-    public Order getOrder(int orderId) {
-        return null;
+    public Optional<Order> selectOrderById(UUID id) {
+        return Optional.empty();
     }
 
     @Override
@@ -118,13 +122,13 @@ public class FootballDataAcessService implements FootballDao{
     }
 
     @Override
-    public void updateOrder(int oldOrderId, Order newOrder) {
-
+    public int updateOrder(UUID id, Order newOrder) {
+        return 0;
     }
 
     @Override
-    public void removeOrder(int orderId) {
-
+    public int removeOrder(UUID id) {
+        return 0;
     }
 
     /**
@@ -133,12 +137,12 @@ public class FootballDataAcessService implements FootballDao{
      * @param role
      */
     @Override
-    public Role addRole(Role role) {
-        return null;
+    public int insertRole(UUID id, Role role) {
+        return 0;
     }
 
     @Override
-    public Role getRole(int roleId) {
+    public Optional<Role> selectRoleById(UUID roleId) {
         return null;
     }
 
@@ -148,13 +152,13 @@ public class FootballDataAcessService implements FootballDao{
     }
 
     @Override
-    public void updateRole(int oldRoleId, Role newRole) {
-
+    public int updateRole(UUID oldRoleId, Role newRole) {
+        return 0;
     }
 
     @Override
-    public void removeRole(int roleId) {
-
+    public int removeRole(UUID roleId) {
+        return 0;
     }
 
     /**
@@ -193,12 +197,12 @@ public class FootballDataAcessService implements FootballDao{
      * @param inventory
      */
     @Override
-    public Inventory addInventory(Inventory inventory) {
-        return null;
+    public int insertInventory(UUID id, Inventory inventory) {
+        return 0;
     }
 
     @Override
-    public Inventory getInventory(int inventoryId) {
+    public Optional<Inventory> getInventory(UUID inventoryId) {
         return null;
     }
 
@@ -208,13 +212,24 @@ public class FootballDataAcessService implements FootballDao{
     }
 
     @Override
-    public void updateInventory(int oldInventoryId, Inventory newInventory) {
-
+    public int updateInventory(UUID oldInventoryId, Inventory newInventory) {
+        return 0;
     }
 
     @Override
-    public void removeInventory(int inventoryId) {
+    public int removeInventory(UUID inventoryId) {
+        return 0;
+    }
 
+    /**
+     * Image
+     *
+     * @param id
+     * @param image
+     */
+    @Override
+    public int insertImage(UUID id, Image image) {
+        return 0;
     }
 
     /**
@@ -223,12 +238,12 @@ public class FootballDataAcessService implements FootballDao{
      * @param image
      */
     @Override
-    public Image addImage(Image image) {
-        return null;
+    public int insertImage(Image image) {
+        return 0;
     }
 
     @Override
-    public Image getImage(int imageId) {
+    public Optional<Image> selectImageById(UUID imageId) {
         return null;
     }
 
@@ -238,12 +253,12 @@ public class FootballDataAcessService implements FootballDao{
     }
 
     @Override
-    public void updateImage(int oldImageId, Image newImage) {
-
+    public int updateImageById(UUID oldImageId, Image newImage) {
+        return 0;
     }
 
     @Override
-    public void removeImage(int imageId) {
-
+    public int removeImage(UUID imageId) {
+        return 0;
     }
 }
