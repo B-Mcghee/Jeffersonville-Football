@@ -142,7 +142,7 @@ public class FootballDaoImpl implements FootballDao {
 
     @Override
     public int insertItem(UUID id, Item item) {
-        itemList.add(new Item(id, item.getCategoryId(), item.getTitle()));
+        itemList.add(new Item(id, item.getCategoryId(), item.getTitle(), item.getSize(), item.getPrice(), item.getDescription()));
         return 1;
     }
 

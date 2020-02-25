@@ -1,6 +1,10 @@
 package com.bm.jhsfootball.dao;
 
+import com.bm.jhsfootball.mapper.ItemMapper;
 import com.bm.jhsfootball.model.*;
+import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -11,6 +15,13 @@ import java.util.UUID;
 @Repository("mySql")
 public class FootballDataAcessService implements FootballDao{
 
+    @Getter
+    JdbcTemplate heySql;
+
+    @Autowired
+    public FootballDataAcessService(JdbcTemplate heySql) {
+        this.heySql = heySql;
+    }
 
     @Override
     public int insertUser(UUID id, User user) {
@@ -77,12 +88,17 @@ public class FootballDataAcessService implements FootballDao{
      */
     @Override
     public List<Item> getAllItems() {
-        return null;
+        String getAllItems = "select * from items";
+        List<Item> allItems = heySql.query(getAllItems,new ItemMapper() );
+        return allItems;
     }
 
     @Override
     public Optional<Item> selectItemById(UUID id) {
-        return Optional.empty();
+        String selectItem = "select * from items";
+        return heySql.query(selectItem, new ItemMapper())
+                .stream()
+                .filter(item -> item.getId().equals(id)).findFirst();
     }
 
     @Override

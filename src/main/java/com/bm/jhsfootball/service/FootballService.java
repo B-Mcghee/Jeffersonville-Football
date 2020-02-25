@@ -18,7 +18,7 @@ public class FootballService {
 
     private final FootballDao footballDao;
     @Autowired
-    public FootballService(@Qualifier("inMemory") FootballDao footballDao) {
+    public FootballService(@Qualifier("mySql") FootballDao footballDao) {
         this.footballDao = footballDao;
     }
 
