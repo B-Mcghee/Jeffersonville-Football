@@ -1,6 +1,6 @@
 <div>
     <form action="">
-        <div class="row">
+        <div class="col-md-6">
             <div>
                 <label for="">Category</label>
                 <input type="text" class="form-control" id="category" #category>
@@ -23,15 +23,20 @@
             </div>
         
         </div>
-        
-        <div>
-            <div>
-                <ul *ngFor = "let item of items">
-                    
-                </ul>
-            </div>
-        </div>
+            <div class="row">
+                <div class="col-6" *ngFor = "let item of itemsArray" >               
+                    <div>
+                        <p>{{item.id}}</p>
 
+                        <p>{{item.title}}</p>
+                        <p>{{item.category}}</p>
+                        <p>{{item.description}}</p>
+                    </div>               
+                </div>
+            </div>
+        
+            
+        
     </form>
 
 </div>
