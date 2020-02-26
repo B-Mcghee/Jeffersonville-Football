@@ -1,0 +1,19 @@
+use JeffersonvilleFootball;
+
+insert into items (id, item_serial, category_id, title, size, price, description) values (1, '6dc59f60-ca82-413a-9501-e13a3bbb2ed2', 5, 'Mazda', '2XL', '13.95', 'eget tincidunt eget tempus vel pede morbi porttitor lorem id ligula suspendisse ornare');
+insert into items (id, item_serial, category_id, title, size, price, description) values (2, 'd813c126-2592-459b-88c9-4f18f79f0132', 2, 'Ford', '2XL', '13.93', 'at vulputate vitae nisl aenean lectus pellentesque eget nunc donec quis orci eget orci vehicula');
+insert into items (id, item_serial, category_id, title, size, price, description) values (3, '1d396fc4-08f0-49a4-83b1-021fc05ea573', 5, 'Toyota', '3XL', '26.15', 'nulla suscipit ligula in lacus curabitur at ipsum ac tellus semper interdum mauris ullamcorper purus');
+insert into items (id, item_serial, category_id, title, size, price, description) values (4, '62e99f33-bf94-4ce0-823f-d63660368377', 2, 'Chevrolet', 'XL', '18.89', 'diam in magna bibendum imperdiet nullam orci pede venenatis');
+insert into items (id, item_serial, category_id, title, size, price, description) values (5, 'bef2e0a0-7f02-4b29-9e93-2fa79f6adb8e', 1, 'Honda', 'M', '36.37', 'condimentum id luctus nec molestie sed justo');
+insert into items (id, item_serial, category_id, title, size, price, description) values (6, 'f7d762d9-8b77-414b-bee3-0c7c9644c3da', 3, 'Mitsubishi', 'S', '30.34', 'sed lacus morbi sem mauris laoreet ut rhoncus aliquet pulvinar sed nisl nunc rhoncus dui');
+insert into items (id, item_serial, category_id, title, size, price, description) values (7, '623e5eda-d17c-4b2a-99ab-475ec5ba5b57', 3, 'Suzuki', 'XS', '23.76', 'tortor sollicitudin mi sit amet lobortis sapien sapien non mi integer ac neque');
+insert into items (id, item_serial, category_id, title, size, price, description) values (8, '067e3bb6-d1e8-431c-82f3-fbdb1875dd13', 1, 'Mitsubishi', '3XL', '28.61', 'ipsum ac tellus semper interdum mauris ullamcorper purus sit amet nulla quisque arcu libero');
+insert into items (id, item_serial, category_id, title, size, price, description) values (9, 'f7be9f15-cb43-4be8-b92b-6634c9ef9d46', 2, 'Chevrolet', 'XL', '29.11', 'parturient montes nascetur ridiculus mus vivamus vestibulum sagittis');
+insert into items (id, item_serial, category_id, title, size, price, description) values (10, '3c0dc041-b5e9-4604-9bff-8aba0c5d2ac6', 5, 'Dodge', 'M', '11.86', 'ipsum dolor sit amet consectetuer adipiscing elit proin risus praesent');
+insert into items (id, item_serial, category_id, title, size, price, description) values (11, '696e5c8f-4f0d-4ad1-85ee-04e31e2e3f91', 4, 'GMC', 'S', '11.94', 'accumsan felis ut at dolor quis odio consequat varius');
+insert into items (id, item_serial, category_id, title, size, price, description) values (12, 'f72e6432-c514-4d16-b95b-89fde2087d22', 3, 'GMC', 'L', '26.61', 'urna pretium nisl ut volutpat sapien arcu sed augue aliquam erat volutpat in congue etiam');
+insert into items (id, item_serial, category_id, title, size, price, description) values (13, '25e03a4e-4b3c-47c5-b9c2-d81ea4f0e8a6', 2, 'GMC', 'XL', '35.70', 'cubilia curae mauris viverra diam vitae quam suspendisse potenti nullam porttitor lacus');
+insert into items (id, item_serial, category_id, title, size, price, description) values (14, '402ee944-ac74-4dc4-ba61-73f7d1731c5c', 4, 'Pontiac', 'L', '20.28', 'blandit nam nulla integer pede justo lacinia eget tincidunt eget tempus vel pede morbi porttitor');
+insert into items (id, item_serial, category_id, title, size, price, description) values (15, '014fe642-3f98-4ea7-9d4e-6f20028882e8', 4, 'Nissan', 'M', '29.70', 'dapibus duis at velit eu est congue elementum in');
+
+select * from items;

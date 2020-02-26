@@ -108,7 +108,9 @@ public class FootballDataAcessService implements FootballDao{
     }
 
     private List<Integer> getImageForItem(UUID id) {
-        final String GET_ITEM_IMAGE = "select * from "
+        final String GET_ITEM_IMAGE = "select * from images where itemId = ?";
+
+        return null;
     }
 
     @Override
