@@ -97,10 +97,20 @@ public class FootballDataAcessService implements FootballDao{
     @Override
     public Optional<Item> selectItemById(UUID id) {
         final String SELECT_ITEM = "select * from items";
-        return heySql.query(SELECT_ITEM, new ItemMapper())
+        Optional<Item> newItem =  heySql.query(SELECT_ITEM, new ItemMapper())
                 .stream()
                 .filter(item -> item.getId().equals(id)).findFirst();
+        newItem.map(item -> {
+            item.setImages(getImageForItem(id));
+            return item;
+        });
+        return newItem;
     }
+
+    private List<Integer> getImageForItem(UUID id) {
+        final String GET_ITEM_IMAGE = "select * from "
+    }
+
     @Override
     @Transactional
     public int updateItemById(UUID id, Item newItem) {

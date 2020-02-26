@@ -20,6 +20,7 @@ public class Item {
     private String size;
     private BigDecimal price;
     private String description;
+
     private List<Integer> images;
 
     public Item(@JsonProperty("id") UUID id,
