@@ -1,5 +1,6 @@
 package com.bm.jhsfootball.dao;
 
+import com.bm.jhsfootball.mapper.ImageMapper;
 import com.bm.jhsfootball.mapper.ItemMapper;
 import com.bm.jhsfootball.model.*;
 import lombok.Getter;
@@ -99,50 +100,53 @@ public class FootballDataAcessService implements FootballDao{
         final String SELECT_ITEM = "select * from items";
         Optional<Item> newItem =  heySql.query(SELECT_ITEM, new ItemMapper())
                 .stream()
-                .filter(item -> item.getId().equals(id)).findFirst();
+                .filter(item -> item.getItemSerial().equals(id)).findFirst();
         newItem.map(item -> {
-            item.setImages(getImageForItem(id));
+            item.setImages(getImageForItem(item.getId()));
             return item;
         });
         return newItem;
     }
 
-    private List<Integer> getImageForItem(UUID id) {
-        final String GET_ITEM_IMAGE = "select * from images where itemId = ?";
+    private List<Image> getImageForItem(int id) {
+        final String GET_ITEM_IMAGE = "select i.* from itemImages  ii " +
+                "join images i on i.imageid = ii.imageId" +
+                "where itemId = ?";
+        return heySql.query(GET_ITEM_IMAGE, new ImageMapper(), id);
 
-        return null;
     }
 
     @Override
     @Transactional
-    public int updateItemById(UUID id, Item newItem) {
+    public int updateItemById(int id, Item newItem) {
         final String UPDATE_ITEM = "update items set " +
+                "itemSerial = ?," +
                 "category_id = ?," +
                 "title = ?," +
                 "size = ?, " +
                 "price = ?," +
                 "description = ? " +
                 "where id = ?";
-        heySql.update(UPDATE_ITEM, newItem.getCategoryId(), newItem.getTitle(), newItem.getSize(), newItem.getPrice(), newItem.getDescription(), id.toString());
+        heySql.update(UPDATE_ITEM,newItem.getItemSerial(), newItem.getCategoryId(), newItem.getTitle(), newItem.getSize(), newItem.getPrice(), newItem.getDescription(), id);
         return 1;
 
 
     }
 
     @Override
-    public int removeItem(UUID id) {
+    public int removeItem(int id) {
         final String DELETE_ITEM = "Delete item where id = ?";
         heySql.update(DELETE_ITEM, id);
         return 1;
     }
     @Override
     @Transactional
-    public int insertItem(UUID id, Item item) {
-        final String insertItem = "insert into Items(id,category_id, title, size, price, description ) " +
+    public int insertItem(int id, Item item) {
+        final String insertItem = "insert into Items(id,itemSerial,category_id, title, size, price, description ) " +
                 "values(?,?,?,?,?,?)";
         item.setId(id);
 
-        return heySql.update(insertItem, item.getId().toString(), item.getCategoryId(), item.getTitle(), item.getSize(), item.getPrice(), item.getDescription());
+        return heySql.update(insertItem, item.getId(), item.getItemSerial().toString(), item.getCategoryId(), item.getTitle(), item.getSize(), item.getPrice(), item.getDescription());
 
     }
 

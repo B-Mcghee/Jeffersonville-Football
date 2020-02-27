@@ -14,16 +14,18 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Item {
-    private UUID id;
+    private int id;
+    private UUID itemSerial;
     private int categoryId;
     private String title;
     private String size;
     private BigDecimal price;
     private String description;
 
-    private List<Integer> images;
+    private List<Image> images;
 
-    public Item(@JsonProperty("id") UUID id,
+    public Item(@JsonProperty("id") int id,
+                @JsonProperty("itemSerial") UUID itemSerial,
                 @JsonProperty("categoryId") int categoryId,
                 @JsonProperty("title") String title,
                 @JsonProperty("size") String size,
@@ -31,6 +33,7 @@ public class Item {
                 @JsonProperty("description") String description
                 ) {
         this.id = id;
+        this.itemSerial = itemSerial;
         this.categoryId = categoryId;
         this.title = title;
         this.size = size;

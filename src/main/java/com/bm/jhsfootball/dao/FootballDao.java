@@ -46,13 +46,14 @@ public interface FootballDao {
 
     List<Item> getAllItems();
     Optional<Item> selectItemById(UUID id);
-    int updateItemById(UUID id, Item newItem);
-    int removeItem(UUID id);
-    int insertItem(UUID id, Item item);
+    int updateItemById(int id, Item newItem);
+    int removeItem(int id);
+    int insertItem(int id, Item item);
 
     default int insertItem(Item item){
         UUID id = UUID.randomUUID();
-          return insertItem(id, item);
+        item.setItemSerial(id);
+          return insertItem(item.getId(), item);
 
     }
     /**
